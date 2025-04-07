@@ -7,7 +7,7 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const dbBasePath = fs.existsSync('/data') ? '/data' : __dirname;
-const DB_FILE = path.join('/data', 'database.db');
+const DB_FILE = path.join(__dirname, 'database.db');
 console.log(`[DB Init] Arquivo do banco de dados será salvo em: ${DB_FILE}`);
 
 // --- Conexão e Inicialização do Banco de Dados ---
