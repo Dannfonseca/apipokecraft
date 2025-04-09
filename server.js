@@ -87,6 +87,22 @@ app.get('/api/items/:id/recipe', (req, res) => {
     });
 });
 
+app.get('/api/items/name/:name', (req, res) => {
+    const itemName = req.params.name;
+    const sql = "SELECT npc_sell_price FROM recipes WHERE name = ?";
+    db.get(sql, [itemName], (err, row) => {
+        if (err) {
+            console.error("Erro ao buscar item por nome:", err.message);
+            return res.status(500).json({ error: 'Erro ao buscar item.' });
+        }
+        if (row) {
+            return res.json({ npc_sell_price: row.npc_sell_price });
+        } else {
+            return res.status(404).json({ message: 'Item não encontrado.' });
+        }
+    });
+   });
+
 // POST /api/items - Criar nova receita
 app.post('/api/items', (req, res) => {
     // Inclui npc_sell_price na desestruturação
