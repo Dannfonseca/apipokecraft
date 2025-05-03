@@ -217,6 +217,11 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: 'Algo deu muito errado no servidor!' });
 });
 
+app.get('/health', (req, res) => {
+    console.log("[GET /health] Ping received.");
+    res.status(200).send('OK');
+});
+
 // --- Iniciar o Servidor ---
 app.listen(PORT, () => {
     console.log(`Servidor backend rodando na porta ${PORT}`);
